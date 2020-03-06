@@ -42,13 +42,12 @@ Television Configuration
 
 *************
 
-.. code:: bash
-
+``
  Model: H9 (2019)
  -- Setting: Wake Up : Wake On LAN
  NOTE: If using Wireless, then use:
  -- Setting: Wake Up : Wake On Wireless Network
-    
+``    
     
 Warning
 *******
