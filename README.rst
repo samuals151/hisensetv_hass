@@ -44,12 +44,10 @@ Television Configuration
 
 .. code:: yaml
 
-    media_player:
-Model: H9 (2019)
-    Televison Settings
-    -- Setting: Wake Up : Wake On LAN
-    NOTE: If using Wireless, then use:
-    -- Setting: Wake Up : Wake On Wireless Network
+ Model: H9 (2019)
+ -- Setting: Wake Up : Wake On LAN
+ NOTE: If using Wireless, then use:
+ -- Setting: Wake Up : Wake On Wireless Network
     
     
 Warning
