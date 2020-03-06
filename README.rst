@@ -54,7 +54,7 @@ Television Configuration
 
 Advanced Commands
 *****************
-To send commands, such as menu navigation, additional commands may be 
+For advanced needs, additional commands, such as menu navigation, may be 
 sent via the developer tools, under the 'Services' tab.
 
 .. code:: bash
