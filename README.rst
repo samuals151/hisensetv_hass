@@ -38,11 +38,13 @@ Configuration
         
 Television Configuration
 ************************
+-- The following settings must be altered
+
+*************
 
 .. code:: yaml
 
--- The following settings must be altered
-
+    media_player:
 Model: H9 (2019)
     Televison Settings
     -- Setting: Wake Up : Wake On LAN
