@@ -49,6 +49,20 @@ Television Configuration
  NOTE: If using Wireless, then use:
  -- Setting: Wake Up : Wake On Wireless Network
    
+
+
+Advanced Commands
+*****************
+To send commands, such as menu navigation, additional commands may be 
+sent via the developer tools, under the 'Services' tab.
+
+.. code:: bash
+
+    select service 'hisensetv.send_command'
+    click 'FILL EXAMPLE DATA' at bottom
+    select Entity - must be HisenseTV device (media_player or switch)
+    update command value, as desired
+    
     
 Warning
 *******
