@@ -22,12 +22,30 @@ Configuration
 
 .. code:: yaml
 
+    media_player:
+      - platform: hisensetv
+        host: 10.0.0.28
+        mac: ab:cd:ef:12:34:56
+        name: tv
+        model: TBD
+        
     switch:
       - platform: hisensetv
         host: 10.0.0.28
         mac: ab:cd:ef:12:34:56
         name: tv
-
+        model: TBD
+        
+Television Configuration
+-- The following settings must be altered
+*******        
+Model: H9
+    Televison Settings
+    -- Setting: Wake Up : Wake On LAN
+    NOTE: If using Wireless, then use:
+    -- Setting: Wake Up : Wake On Wireless Network
+    
+    
 Warning
 *******
 This is provided **as-is**.
