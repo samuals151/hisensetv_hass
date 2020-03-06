@@ -1,0 +1,19 @@
+
+DOMAIN = "hisensetv"
+
+CONF_MODEL = "model"
+
+DATA_TV_STATUS = "tv_status_data"
+
+DEFAULT_COMMAND_PARAM = ""
+DEFAULT_NAME = "tv"
+DEFAULT_PING_TIMEOUT = 1
+
+DEFAULT_MAX_VOLUME = 100
+DEFAULT_MIN_VOLUME = 0
+
+DEFAULT_MODEL = "v1"
+
+HISENSETV_DEVICES = "hisensetv_devices"
+
+ICON_TV = "mdi:television"
