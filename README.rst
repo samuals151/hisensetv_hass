@@ -37,10 +37,13 @@ Configuration
         model: TBD
         
 Television Configuration
--- The following settings must be altered
-*******        
+************************
 
-Model: H9
+.. code:: yaml
+
+-- The following settings must be altered
+
+Model: H9 (2019)
     Televison Settings
     -- Setting: Wake Up : Wake On LAN
     NOTE: If using Wireless, then use:
@@ -52,3 +55,7 @@ Warning
 This is provided **as-is**.
 This is my first time going this deep into homeassistant and I have no idea
 if I have horribly messed something up.
+
+Future
+*******
+Determine if model functional is necessary for future model options
