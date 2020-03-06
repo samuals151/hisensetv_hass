@@ -42,12 +42,13 @@ Television Configuration
 
 *************
 
-``
+.. code:: yaml
+
  Model: H9 (2019)
  -- Setting: Wake Up : Wake On LAN
  NOTE: If using Wireless, then use:
  -- Setting: Wake Up : Wake On Wireless Network
-``    
+   
     
 Warning
 *******
