@@ -1,40 +1,38 @@
 """ Hisense Television Integration. """
 from hisensetv import HisenseTv
-from homeassistant.components.switch import PLATFORM_SCHEMA
-from homeassistant.components.switch import SwitchDevice
-from homeassistant.const import CONF_BROADCAST_ADDRESS
-from homeassistant.const import CONF_HOST
-from homeassistant.const import CONF_MAC
-from homeassistant.const import CONF_NAME
+from homeassistant.components.switch import DOMAIN, SwitchDevice
+from homeassistant.core import callback
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.typing import HomeAssistantType
 from typing import Callable
 from typing import Optional
-import homeassistant.helpers.config_validation as cv
+from homeassistant.helpers import config_validation as cv, entity_platform, service
+from homeassistant.helpers.entity_component import EntityComponent
+
 import logging
 import platform
-import socket
 import subprocess as sp
+import socket
 import voluptuous as vol
 import wakeonlan
 
-_LOGGER = logging.getLogger(__name__)
+from . import HisenseTvDevice
 
-DEFAULT_NAME = "tv"
-DEFAULT_PING_TIMEOUT = 1
-
-DOMAIN = "hisensetv"
-_LOGGER = logging.getLogger(__name__)
-
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
-    {
-        vol.Required(CONF_HOST): cv.string,
-        vol.Required(CONF_MAC): cv.string,
-        vol.Optional(CONF_BROADCAST_ADDRESS): cv.string,
-        vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-    }
+from homeassistant.const import (
+    CONF_BROADCAST_ADDRESS,
+    CONF_HOST,
+    CONF_MAC,
+    CONF_NAME,
 )
 
+from . import const
+from .const import (
+    CONF_MODEL,
+    DEFAULT_PING_TIMEOUT,
+    DOMAIN,
+)
+
+_LOGGER = logging.getLogger(__name__)
 
 def setup_platform(
     hass: HomeAssistantType,
@@ -42,61 +40,36 @@ def setup_platform(
     add_entities: Callable,
     discovery_info: Optional[dict] = None,
 ):
-    """Set up a Hisense TV."""
+    """Setup Hisense TV on/off as switch."""
+
     broadcast_address = config.get(CONF_BROADCAST_ADDRESS)
-    host = config[CONF_HOST]
-    mac = config[CONF_MAC]
-    name = config[CONF_NAME]
+    host = config.get(CONF_HOST)
+    mac = config.get(CONF_MAC)
+    model = config.get(CONF_MODEL)
+    name = config.get(CONF_NAME)
 
     add_entities(
         [
-            HisenseTvEntity(
+           HisenseTvSwitch(
                 host=host,
                 mac=mac,
+                model=model,
                 name=name,
                 broadcast_address=broadcast_address,
-            )
+           )
         ],
         True,
     )
 
 
-class HisenseTvEntity(SwitchDevice):
-    def __init__(self, host: str, mac: str, name: str, broadcast_address: str):
+class HisenseTvSwitch(HisenseTvDevice, SwitchDevice):
+    """Representation of a HiSense TV as Switch."""
+
+    def __init__(self, host: str, mac: str, model: str, name: str, broadcast_address: str):
+        """Initialize the switch"""
+        HisenseTvDevice.__init__(self, host, mac, model, name, broadcast_address)
         self._name = name
-        self._host = host
-        self._mac = mac
-        self._broadcast_address = broadcast_address
-        self._is_on = True
-        self._state = False
-
-    def turn_on(self, **kwargs):
-        if self._broadcast_address:
-            wakeonlan.send_magic_packet(
-                self._mac, ip_address=self._broadcast_address
-            )
-        else:
-            wakeonlan.send_magic_packet(self._mac)
-
-    def turn_off(self, **kwargs):
-        try:
-            with HisenseTv(self._host) as tv:
-                tv.send_key_power()
-        except socket.error as e:
-            if "host is unreachable" in str(e).lower():
-                _LOGGER.debug("unable to reach TV, likely powered off already")
-            else:
-                raise
-
-    @property
-    def is_on(self):
-        """Return true if switch is on."""
-        return self._state
-
-    @property
-    def name(self):
-        """Return the name of the switch."""
-        return self._name
+        self._state = True
 
     def update(self):
         """Check if device is on and update the state."""
