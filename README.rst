@@ -42,7 +42,7 @@ Television Configuration
 
 *************
 
-.. code:: yaml
+.. code:: bash
 
  Model: H9 (2019)
  -- Setting: Wake Up : Wake On LAN
