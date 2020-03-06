@@ -73,4 +73,4 @@ if I have horribly messed something up.
 
 Future
 *******
-Determine if model functional is necessary for future model expansion possibilities
+Determine if model functionality is necessary/valuable for future model expansion possibilities
