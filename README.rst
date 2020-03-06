@@ -40,7 +40,9 @@ Television Configuration
 -- The following settings must be altered
 *******        
 Model: H9
+
 .. code:: bash
+
     Televison Settings
     -- Setting: Wake Up : Wake On LAN
     NOTE: If using Wireless, then use:
