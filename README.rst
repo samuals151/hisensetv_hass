@@ -50,6 +50,10 @@ Television Configuration
  NOTE: If using Wireless, then use:
  -- Setting: Wake Up : Wake On Wireless Network
    
+Known Issues
+************
+- For the media_player, the source is not known until an option is selected. 
+Source selection changes performed outside of Home Assistant will not be reflected.
 
 
 Advanced Commands
