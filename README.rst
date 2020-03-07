@@ -80,4 +80,5 @@ if I have horribly messed something up.
 
 Future
 *******
-Determine if model functionality is necessary/valuable for future model expansion possibilities
+- Is authorazation required again, after hass upgrade, if hass is a docker configuration? I'll need to test this.
+- Determine if model functionality is necessary/valuable for future model expansion possibilities
