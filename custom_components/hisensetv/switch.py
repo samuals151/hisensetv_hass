@@ -1,5 +1,6 @@
 """ Hisense Television Integration. """
 from hisensetv import HisenseTv
+#from homeassistant.components.switch import SwitchDevice
 from homeassistant.components.switch import DOMAIN, SwitchDevice
 from homeassistant.core import callback
 from homeassistant.helpers.typing import ConfigType
@@ -8,7 +9,6 @@ from typing import Callable
 from typing import Optional
 from homeassistant.helpers import config_validation as cv, entity_platform, service
 from homeassistant.helpers.entity_component import EntityComponent
-
 import logging
 import platform
 import subprocess as sp
@@ -41,7 +41,6 @@ def setup_platform(
     discovery_info: Optional[dict] = None,
 ):
     """Setup Hisense TV on/off as switch."""
-
     broadcast_address = config.get(CONF_BROADCAST_ADDRESS)
     host = config.get(CONF_HOST)
     mac = config.get(CONF_MAC)
@@ -94,3 +93,4 @@ class HisenseTvSwitch(HisenseTvDevice, SwitchDevice):
 
         status = sp.call(ping_cmd, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
         self._state = not bool(status)
+

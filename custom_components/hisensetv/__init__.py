@@ -40,58 +40,35 @@ from .const import (
     DEFAULT_MODEL,
     DEFAULT_NAME,
     DOMAIN,
+    DOMAIN_DATA,
     ICON_TV,
+    SERVICE_SEND_COMMAND,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
 SCAN_INTERVAL = timedelta(seconds=30)
 
-# Not sure why this is needed
-ENTITY_ID_FORMAT = DOMAIN + ".{}"
 
-HISENSETV_CONFIG_SCHEMA = vol.Schema(
-    {
-        vol.Required(CONF_HOST): cv.string,
-        vol.Required(CONF_MAC): cv.string,
-        vol.Optional(CONF_BROADCAST_ADDRESS): cv.string,
-        vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
-        vol.Optional(CONF_MODEL, default=DEFAULT_MODEL): cv.string,
-    }
-)
+class HisenseData:
+    """Init Data Class."""
 
-CONFIG_SCHEMA = vol.Schema(
-    {DOMAIN: vol.Schema({cv.slug: HISENSETV_CONFIG_SCHEMA})}, extra=vol.ALLOW_EXTRA
-)
-
-HISENSETV_COMPONENTS = [
-#    "binary_sensor",
-    "media_player",
-#    "sensor",
-    "switch",
-]
+    def __init__(self):
+        """Init Class."""
+        self.devices = []
 
 
 async def async_setup(hass: HomeAssistantType, base_config: ConfigType) -> bool:
+#def setup(hass: HomeAssistantType, base_config: ConfigType) -> bool:
     """Set up a hisense tv."""
-
-    _LOGGER.info("Setting up %s", DOMAIN)
-
+    hass.data[DOMAIN_DATA] = HisenseData()
     component = hass.data[DOMAIN] = EntityComponent(_LOGGER, DOMAIN, hass, SCAN_INTERVAL)
-
     await component.async_setup(base_config)
-
+    _LOGGER.info("Setting up %s", DOMAIN)
     return True
 
-async def async_setup_entry(hass, entry):
-    """Set up a config entry."""
-    return await hass.data[DOMAIN].async_setup_entry(entry)
 
-
-async def async_unload_entry(hass, entry):
-    """Unload a config entry."""
-    return await hass.data[DOMAIN].async_unload_entry(entry)
-
+#class HisenseTvDevice(Entity):
 class HisenseTvDevice(ToggleEntity):
     """Representation of a generic HiSense TV entity."""
 
@@ -101,9 +78,9 @@ class HisenseTvDevice(ToggleEntity):
         self._mac = mac
         self._model = model
         self._broadcast_address = broadcast_address
-        self._is_on = False
+        self._is_on = True
         self._icon = ICON_TV
-        self._state = False
+        self._state = True
 
     def turn_on(self, **kwargs):
         self._state = True
@@ -145,3 +122,4 @@ class HisenseTvDevice(ToggleEntity):
     def icon(self):
         """Return the icon to be used for this entity."""
         return self._icon
+

@@ -1,14 +1,11 @@
-# hisensetv - services.yaml
 
 send_command:
   description: Sends commands to tv via mqtt
   fields:
     entity_id:
       description: Name of the entity to command
-      example: "switch.tv"
+      example: "media_player.tv"
     command:
       description: Command to perform
-      example: "TV_POWER"
-    param:
-      description: Command parameter, ie, Volume
-      example: ""
+      example: "menu"
+
