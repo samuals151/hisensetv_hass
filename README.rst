@@ -58,6 +58,9 @@ Known Issues
 - For the media_player, the source is not known until an option is selected. 
 Source selection changes performed outside of Home Assistant will not be reflected.
 
+- For the media_player, a mute button is displayed but is not functional. 
+Possible HASS bug, since mute features should be deactivated.
+
 
 Advanced Commands
 *****************
