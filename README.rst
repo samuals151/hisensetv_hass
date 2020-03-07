@@ -22,8 +22,6 @@ Configuration
 
 .. code:: yaml
 
-# NOTE: Either or both can be enabled for a single TV
-
     media_player:
       - platform: hisensetv
         host: 10.0.0.28
@@ -37,7 +35,10 @@ Configuration
         mac: ab:cd:ef:12:34:56
         name: tv
         model: TBD
-        
+
+# NOTE: Either or both can be enabled for a single TV
+
+
 Television Configuration
 ************************
 -- The following settings must be altered
