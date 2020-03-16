@@ -9,3 +9,10 @@ send_command:
       description: Command to perform
       example: "menu"
 
+update_sources:
+  description: Requests and processes sources list from tv
+  fields:
+    entity_id:
+      description: Name of the entity to command
+      example: "media_player.tv"
+
