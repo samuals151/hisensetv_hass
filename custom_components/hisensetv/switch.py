@@ -136,23 +136,13 @@ class HisenseTvSwitch(HisenseTvDevice, SwitchDevice):
         _LOGGER.debug("_update - starting...")
         try:
            """Check if device is on and update the state."""
-           if platform.system().lower() == "windows":
-               ping_cmd = [
-                   "ping",
-                   "-n",
-                   "1",
+           ping_cmd = [
+                   "nc",
                    "-w",
-                   str(DEFAULT_PING_TIMEOUT * 1000),
-                   str(self._host),
-               ]
-           else:
-               ping_cmd = [
-                   "ping",
-                   "-c",
-                   "1",
-                   "-W",
                    str(DEFAULT_PING_TIMEOUT),
+                   "-z",
                    str(self._host),
+                   "36669",
                ]
 
            status = sp.call(ping_cmd, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
